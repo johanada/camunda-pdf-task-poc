@@ -1,0 +1,9 @@
+camunda:
+  build: .
+  environment:
+    - JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom -Duser.timezone=Europe/Rome
+  ports:
+    - "8080:8080"
+  dns:
+    - 127.0.0.53
+    - 8.8.8.8

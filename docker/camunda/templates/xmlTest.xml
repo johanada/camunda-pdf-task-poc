@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<request>
+    <studentName>Jan Novák</studentName>
+    <programme>Otevřená Informatika</programme>
+    <studyType>magisterské</studyType>
+    <studyForm>prezenční</studyForm>
+    <studyStartDate>1.1.2020</studyStartDate>
+    <phone>420777888777</phone>
+    <email>jannovak@gmail.com</email>
+    <personalNumber>123456</personalNumber>
+    <studentPlaceOfBirth>Brno</studentPlaceOfBirth>
+    <field>Software</field>
+    <startDate>1.1.2020</startDate>
+    <endDate>1.1.2020</endDate>
+    <studentDateOfBirth>1.1.2020</studentDateOfBirth>
+    <documentGeneratedDate>1.1.2020</documentGeneratedDate>
+</request>

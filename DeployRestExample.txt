@@ -1,0 +1,17 @@
+curl -w "\n" --cookie-jar cookie.txt \
+ -H "Accept: application/json" \
+ -d "username=demo" \
+ -d "password=demo" \
+ http://localhost:8080/camunda/app/cockpit
+
+curl -w "\n" --cookie cookie.txt \
+-H "Accept: application/json" \
+-F "deployment-name=rest-test" \
+-F "enable-duplicate-filtering=false" \
+-F "deploy-changed-only=false" \
+-F "binaryFileDownload-Jsoup.bpmn=@/home/adam/IdeaProjects/camunda-pdf-task-poc/processes/binaryFileDownload-Jsoup.bpmn" \
+-F "embeddedForm.html=@/home/adam/IdeaProjects/camunda-pdf-task-poc/forms/embeddedForm.html" \
+-F "downloadPdf.js=@/home/adam/IdeaProjects/camunda-pdf-task-poc/scripts/downloadPdf.js" \
+-F "potvrzeni-o-studiu.xsl=@/home/adam/IdeaProjects/camunda-pdf-task-poc/docker/camunda/templates/potvrzeni-o-studiu.xsl" \
+-F "xmlTest.xml=@/home/adam/IdeaProjects/camunda-pdf-task-poc/docker/camunda/templates/xmlTest.xml" \
+http://localhost:8080/engine-rest/deployment/create
