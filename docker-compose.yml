@@ -1,9 +1,15 @@
-camunda:
-  build: .
-  environment:
-    - JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom -Duser.timezone=Europe/Rome
-  ports:
-    - "8080:8080"
-  dns:
-    - 127.0.0.53
-    - 8.8.8.8
+services:
+  camunda:
+    build: .
+    environment:
+      JAVA_OPTS: -Djava.security.egd=file:/dev/./urandom -Duser.timezone=Europe/Berlin
+      CAMUNDA_TOKENS_FILE: /run/secrets/camunda-tokens
+    ports:
+      - "8080:8080"
+    network_mode: "host"
+    secrets:
+      - camunda-tokens
+
+secrets:
+  camunda-tokens:
+    file: camunda-tokens.json
