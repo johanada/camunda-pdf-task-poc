@@ -3,7 +3,7 @@
                 xmlns:barcode="org.krysalis.barcode4j.xalan.BarcodeExt" xmlns:common="http://exslt.org/common"
                 xmlns:xalan="http://xml.apache.org" version="1.1" exclude-result-prefixes="barcode common xalan">
     <xsl:template match="request">
-        <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="Lora">
+        <fo:root xml:lang="en-uk" xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="FreeMono">
 
             <fo:layout-master-set>
                 <fo:simple-page-master master-name="A4" page-width="210mm" page-height="297mm" margin-top="0.5cm"
@@ -68,11 +68,11 @@
                         <fo:table-body>
                             <fo:table-row>
                                 <fo:table-cell>
-                                    <fo:block font-size="12pt">V Praze ..........................</fo:block>
+                                    <fo:block font-size="12pt">V Praze ..................</fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell>
                                     <fo:block font-size="12pt">
-                                        ........................................................
+                                        ..........................
                                     </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
@@ -98,7 +98,7 @@
                     </fo:block>
 
 
-                    <fo:block font-size="12pt" text-align="left" space-before="8cm" space-after="1mm">
+                    <fo:block font-size="12pt" text-align="left" space-before="6cm" space-after="1mm">
                         Vysoká škola: České vysoké učení technické v Praze
                     </fo:block>
                     <fo:block font-size="12pt" text-align="left" space-before="1mm" space-after="1mm">
@@ -147,11 +147,11 @@
                         <fo:table-body>
                             <fo:table-row>
                                 <fo:table-cell>
-                                    <fo:block font-size="12pt">V Praze ..........................</fo:block>
+                                    <fo:block font-size="12pt">V Praze ...................</fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell>
                                     <fo:block font-size="12pt">
-                                        ........................................................
+                                        ........................
                                     </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>

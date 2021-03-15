@@ -1,4 +1,4 @@
-function getSecret(key, secretsEnv) // if needed, this function can contain OAuth autentication.
+function getSecret(key, secretsEnv) // if needed, this function can contain OAuth authentication.
 {
     with (new JavaImporter(java.lang.System, java.nio.file))
     {
@@ -31,8 +31,8 @@ function downloadFile(fileUrl)
         var IOUtils = Java.type('org.apache.commons.io.IOUtils');
         var String = Java.type('java.lang.String');
 
-        var xsl = S(new String(IOUtils.toByteArray(resource), 'UTF-8'));
-        var xml = S(new String(IOUtils.toByteArray(resourceTestXml), 'UTF-8'));
+        var xsl = S(new String(IOUtils.toByteArray(resource), 'UTF-8')); // set your xsl template
+        var xml = S(new String(IOUtils.toByteArray(resourceTestXml), 'UTF-8')); // set properties in xml
 
         var pdfRequestBody = xsl;
         pdfRequestBody += "\n__XML_PROPERTIES__\n";
@@ -42,16 +42,11 @@ function downloadFile(fileUrl)
             .method(Java.type('org.jsoup.Connection.Method').POST)
             .header('Accept', 'text/plain; charset=UTF-8')
             .header('Content-Type', 'text/plain; charset=UTF-8')
+            .header('Authorization', 'Bearer '.concat(token))
             .requestBody(pdfRequestBody)
             .timeout(30000)
             .ignoreContentType(true) // This is used because Jsoup "approved" content-types parsing is enabled by default by Jsoup
             .execute()
-
-       // var doc = Jsoup.connect(fileUrl)
-        //    .method(Java.type('org.jsoup.Connection.Method').GET)
-        //    .timeout(30000)
-        //    .ignoreContentType(true)
-        //    .execute()
 
         var bodyStream = doc.bodyStream()
 
@@ -68,13 +63,6 @@ function saveFile(fileStream, fileName, mimeType)
         .create()
 
     execution.setVariable(fileName, file)
-
-}
-
-function generateXmlProperties() {
-    var studentName = execution.getVariable("studentName");
-    var programme = execution.getVariable("programme");
-    var branch = execution.get
 }
 
 function downloadAndSaveFile(fileUrl, fileName, mimeType)
@@ -83,7 +71,4 @@ function downloadAndSaveFile(fileUrl, fileName, mimeType)
     saveFile(file, fileName, mimeType)
 }
 
-downloadAndSaveFile(url, 'mypdf.pdf', 'application/pdf')
-
-
-//execution.setVariable('template', xml);
+downloadAndSaveFile(url, 'potvrzeni_o_studiu.pdf', 'application/pdf')

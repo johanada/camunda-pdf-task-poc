@@ -1,9 +1,12 @@
+#toto by nemelo byt potreba pro nahrani, pripadne se nalogovat do Camundy pres prohlizec
 curl -w "\n" --cookie-jar cookie.txt \
  -H "Accept: application/json" \
  -d "username=demo" \
  -d "password=demo" \
  http://localhost:8080/camunda/app/cockpit
 
+
+#nahraje proces spolu s potrebnymi soubory
 curl -w "\n" --cookie cookie.txt \
 -H "Accept: application/json" \
 -F "deployment-name=rest-test" \
