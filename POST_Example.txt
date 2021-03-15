@@ -1,0 +1,215 @@
+> POST /getpdf?name=newTest.pdf HTTP/1.1
+> Host: localhost:8081
+> User-Agent: insomnia/2020.3.3
+> Cookie: JSESSIONID=E3C370487CAB7AA26955F4EA1881F09B
+> Content-Type: text/plain
+> Authorization: Bearer 30778f09-69cc-4db4-9aff-0cf2c9dac7f5
+> Accept: */*
+> Content-Length: 10889
+
+
+Header - Content-Type: text/plain
+Query param: "name" - name.pdf (e.g. ?name=newTest.pdf)
+Authorization: Bearer token
+BODY: (v insomnii mam JSON ale melo by to byt jedno - nize je template pro potvrzeni o studiu)
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                xmlns:barcode="org.krysalis.barcode4j.xalan.BarcodeExt" xmlns:common="http://exslt.org/common"
+                xmlns:xalan="http://xml.apache.org" version="1.1" exclude-result-prefixes="barcode common xalan">
+    <xsl:template match="request">
+        <fo:root xml:lang="en-uk" xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="FreeMono">
+
+            <fo:layout-master-set>
+                <fo:simple-page-master master-name="A4" page-width="210mm" page-height="297mm" margin-top="0.5cm"
+                                       margin-bottom="1cm" margin-left="2.75cm" margin-right="1.5cm">
+                    <fo:region-body margin-top="18mm" precedence="true"/>
+                    <fo:region-before extent="2cm"/>
+                    <fo:region-after/>
+                    <!--<fo:region-start  extent="2cm"/>-->
+                    <!--<fo:region-end    extent="2cm"/>-->
+                </fo:simple-page-master>
+            </fo:layout-master-set>
+
+            <fo:page-sequence master-reference="A4">
+
+                <!-- Definice hlavního obsahu dokumentu -->
+                <fo:flow flow-name="xsl-region-body">
+                    <fo:block font-size="12pt" text-align="left" space-before="1mm" space-after="1mm">
+                        Vysoká škola: České vysoké učení technické v Praze
+                    </fo:block>
+                    <fo:block font-size="12pt" text-align="left" space-before="1mm" space-after="1mm">
+                        Fakulta elektrotechnická
+                    </fo:block>
+                    <fo:block font-size="12pt" text-align="left" space-before="1mm" space-after="1mm">
+                        Jméno a příjmení:
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="studentName"/>
+                        </fo:inline>
+                    </fo:block>
+                    <fo:block font-size="12pt" space-before="1mm">Datum narození:
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="studentDateOfBirth"/>
+                        </fo:inline>
+                    </fo:block>
+                    <fo:block font-size="12pt" space-before="1mm">Místo narození:
+                        <xsl:value-of select="studentPlaceOfBirth"/>
+                    </fo:block>
+                    <fo:block font-weight="bold" font-size="14pt" space-after="2mm" text-align="center"
+                              padding-left="1.5mm" padding-before="5mm">
+                        POTVRZENÍ O STUDIU
+                    </fo:block>
+
+                    <fo:block font-size="12pt" text-align="left" space-before="2mm" space-after="1mm">
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="studentName"/>
+                        </fo:inline>
+                        je od
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="startDate"/>
+                        </fo:inline>
+                        do
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="endDate"/>
+                        </fo:inline>
+                        studentem/kou
+                        <xsl:value-of select="studyForm"/> formy
+                        <xsl:value-of select="studyType"/> studia ve studijním programu
+                        <xsl:value-of select="programme"/> v oboru <xsl:value-of select="field"/>.
+                    </fo:block>
+                    <fo:table space-before="1.5cm">
+                        <fo:table-column column-number="1" column-width="100mm"/>
+                        <fo:table-column column-number="2" column-width="40mm"/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt">V Praze ..................</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt">
+                                        ..........................
+                                    </fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
+                    <fo:table>
+                        <fo:table-column column-number="1" column-width="109mm"/>
+                        <fo:table-column column-number="2" column-width="40mm"/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt"></fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt" text-align="center">razítko, podpis</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
+                    <fo:block font-size="8pt" padding-before="15px" text-align="center">
+                        Žádost byla studentem vygenerována prostřednictvím systému eProcesy. Tento dokument byl vygenerován
+                        <xsl:value-of select="documentGeneratedDate"/>
+                    </fo:block>
+
+
+                    <fo:block font-size="12pt" text-align="left" space-before="6cm" space-after="1mm">
+                        Vysoká škola: České vysoké učení technické v Praze
+                    </fo:block>
+                    <fo:block font-size="12pt" text-align="left" space-before="1mm" space-after="1mm">
+                        Fakulta elektrotechnická
+                    </fo:block>
+                    <fo:block font-size="12pt" text-align="left" space-before="1mm" space-after="1mm">
+                        Jméno a příjmení:
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="studentName"/>
+                        </fo:inline>
+                    </fo:block>
+                    <fo:block font-size="12pt" space-before="1mm">Datum narození:
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="studentDateOfBirth"/>
+                        </fo:inline>
+                    </fo:block>
+                    <fo:block font-size="12pt" space-before="1mm">Místo narození:
+                        <xsl:value-of select="studentPlaceOfBirth"/>
+                    </fo:block>
+                    <fo:block font-weight="bold" font-size="14pt" space-after="2mm" text-align="center"
+                              padding-left="1.5mm" padding-before="5mm">
+                        POTVRZENÍ O STUDIU
+                    </fo:block>
+
+
+                    <fo:block font-size="12pt" text-align="left" space-before="2mm" space-after="1mm">
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="studentName"/>
+                        </fo:inline>
+                        je od
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="startDate"/>
+                        </fo:inline>
+                        do
+                        <fo:inline font-weight="bold">
+                            <xsl:value-of select="endDate"/>
+                        </fo:inline>
+                        studentem/kou
+                        <xsl:value-of select="studyForm"/> formy
+                        <xsl:value-of select="studyType"/> studia ve studijním programu
+                        <xsl:value-of select="programme"/> v oboru <xsl:value-of select="field"/>.
+                    </fo:block>
+                    <fo:table space-before="1.5cm">
+                        <fo:table-column column-number="1" column-width="100mm"/>
+                        <fo:table-column column-number="2" column-width="40mm"/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt">V Praze ...................</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt">
+                                        ........................
+                                    </fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
+                    <fo:table>
+                        <fo:table-column column-number="1" column-width="109mm"/>
+                        <fo:table-column column-number="2" column-width="40mm"/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt"></fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt" text-align="center">razítko, podpis</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
+                    <fo:block font-size="8pt" padding-before="15px" text-align="center">
+                        Žádost byla studentem vygenerována prostřednictvím systému eProcesy. Tento dokument byl vygenerován
+                        <xsl:value-of select="documentGeneratedDate"/>
+                    </fo:block>
+                </fo:flow>
+            </fo:page-sequence>
+        </fo:root>
+    </xsl:template>
+</xsl:stylesheet>
+__XML_PROPERTIES__
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<request>
+    <studentName>Jan Novák</studentName>
+    <programme>Otevřená Informatika</programme>
+    <studyType>magisterské</studyType>
+    <studyForm>prezenční</studyForm>
+    <studyStartDate>1.1.2020</studyStartDate>
+    <phone>420777888777</phone>
+    <email>jannovak@gmail.com</email>
+    <personalNumber>123456</personalNumber>
+    <studentPlaceOfBirth>Brno</studentPlaceOfBirth>
+    <field>Software</field>
+    <startDate>1.1.2020</startDate>
+    <endDate>1.1.2020</endDate>
+    <studentDateOfBirth>1.1.2020</studentDateOfBirth>
+    <documentGeneratedDate>1.1.2020</documentGeneratedDate>
+</request>
